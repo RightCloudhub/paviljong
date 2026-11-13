@@ -1,0 +1,66 @@
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: Branch to publish; resolve its latest head after acquiring the Pages concurrency lock
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Prepare site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          # Publish the current branch head, so a delayed Issue run cannot
+          # replace a newer deployment with an older imported commit.
+          ref: ${{ inputs.ref || github.ref_name }}
+          persist-credentials: false
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Collect public files
+        shell: bash
+        run: |
+          site_dir="${RUNNER_TEMP}/paviljong-pages"
+          mkdir -p "$site_dir"
+          cp index.html style.css main.js favicon.svg .nojekyll "$site_dir/"
+          cp -R assets data demos "$site_dir/"
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/paviljong-pages
+
+  deploy:
+    name: Deploy site
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

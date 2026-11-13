@@ -1,0 +1,60 @@
+name: 添加网页作品
+description: 仓库 Contributors 提交独立 HTML 网页并加入作品集
+title: "[作品提交] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        只有 GitHub Contributors 名单中有贡献记录的账号可以收录作品；作者和本次提交或编辑者都会校验。
+        提交一个包含内联 CSS / JavaScript 的完整 HTML 文件。通过后自动加入作品集并部署。
+        网页 HTML 请放在最后一个字段中，最多 55 KiB；不要填写下载链接。已收录作品的修改请提交 Pull Request。
+  - type: input
+    id: project-id
+    attributes:
+      label: 项目标识
+      description: 唯一的小写英文标识，最多 48 个字符，只能使用字母、数字和中间的连字符。
+      placeholder: my-html-project
+    validations:
+      required: true
+  - type: input
+    id: project-title
+    attributes:
+      label: 项目名称
+      description: 卡片标题，最多 80 个字符。
+      placeholder: 我的网页项目
+    validations:
+      required: true
+  - type: textarea
+    id: project-description
+    attributes:
+      label: 项目简介
+      description: 简短说明项目内容，最多 240 个字符。
+      placeholder: 一个可以实际打开和操作的网页。
+    validations:
+      required: true
+  - type: dropdown
+    id: project-category
+    attributes:
+      label: 分类
+      description: design 为网页设计，interaction 为交互实验，tool 为小工具。
+      options:
+        - design
+        - interaction
+        - tool
+    validations:
+      required: true
+  - type: input
+    id: project-tags
+    attributes:
+      label: 标签
+      description: 可选；使用逗号分隔，最多 6 个，每个最多 24 个字符。
+      placeholder: HTML, CSS, JavaScript
+  - type: textarea
+    id: project-html
+    attributes:
+      label: 网页 HTML
+      description: 粘贴完整 HTML 源码，含 doctype、html、head、title 和 body。此字段会自动显示为代码块，请勿额外添加代码围栏。
+      render: html
+      placeholder: "<!doctype html>..."
+    validations:
+      required: true

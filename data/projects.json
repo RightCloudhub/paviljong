@@ -1,0 +1,9 @@
+[
+  {"id":"pelican","title":"鹈鹕骑自行车","description":"一只戴着头盔的鹈鹕，骑进 SVG 的风景里。","category":"interaction","tags":["SVG","Animation"],"date":"2026-11-13","url":"demos/Pelicans-fable-5.2-max/index.html","preview":"assets/previews/pelican.svg","featured":true},
+  {"id":"studio","title":"空间工作室","description":"关于空间、材料与留白的网页设计。","category":"design","tags":["HTML","CSS"],"date":"2026-11-13","url":"demos/studio/index.html","preview":null,"featured":true},
+  {"id":"orbit","title":"轨道实验","description":"让粒子沿着轨道，回应每一次移动。","category":"interaction","tags":["Canvas","JavaScript"],"date":"2026-11-13","url":"demos/orbit/index.html","preview":null,"featured":false},
+  {"id":"palette","title":"配色工坊","description":"生成一组配色，找到下一次设计的起点。","category":"tool","tags":["CSS","JavaScript"],"date":"2026-11-13","url":"demos/palette/index.html","preview":null,"featured":false},
+  {"id":"reading","title":"纸间阅读","description":"用编辑式排版，留下一点阅读的时间。","category":"design","tags":["HTML","Typography"],"date":"2026-11-13","url":"demos/reading/index.html","preview":null,"featured":false},
+  {"id":"focus","title":"专注时钟","description":"一段专注，一段休息，按自己的节奏来。","category":"tool","tags":["JavaScript"],"date":"2026-11-13","url":"demos/focus/index.html","preview":null,"featured":false},
+  {"id":"kinetic","title":"字形实验","description":"调整文字的尺寸与字重，看看排版的可能。","category":"interaction","tags":["Typography","CSS"],"date":"2026-11-13","url":"demos/kinetic/index.html","preview":null,"featured":false}
+]

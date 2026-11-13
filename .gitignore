@@ -1,0 +1,18 @@
+# Local dependencies and editor files
+node_modules/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Browser checks, design reports and temporary output
+.taste-skill/
+shots/
+test-results/
+playwright-report/
+*.log
+
+# Local secrets
+.env
+.env.*
+!.env.example

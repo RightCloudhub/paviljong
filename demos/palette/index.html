@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="生成一组协调的颜色，并点击色块复制 HEX 色值。">
+  <meta name="theme-color" content="#edf1e7">
+  <title>Palette — 配色生成器</title>
+  <script>if(new URLSearchParams(location.search).get('preview')==='1')document.documentElement.classList.add('preview');if(window.self!==window.top)document.documentElement.classList.add('embedded');</script>
+  <style>
+    .embedded .back { display: none; }
+    :root{color-scheme:light;--paper:#edf1e7;--ink:#303c31;--muted:#677260;--line:#d2d9ca}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif}button,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:5px}button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset:5px}.page{max-width:1440px;margin:auto;padding:0 64px}header{height:100px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.logo{display:flex;align-items:center;gap:10px;font-size:21px;letter-spacing:-.8px;font-weight:600}.logo-dot{width:18px;height:18px;border-radius:50%;background:#718568;box-shadow:10px 0 0 #a8b89a;margin-right:10px}.back{display:flex;min-height:44px;align-items:center;font-size:12px}.intro{padding:68px 0 44px;display:flex;align-items:flex-end;justify-content:space-between;gap:36px}.eyebrow{font-size:10px;letter-spacing:2px;margin:0 0 22px;color:var(--muted)}h1{font-family:Georgia,serif;font-size:clamp(48px,5.4vw,78px);font-weight:400;letter-spacing:-3px;line-height:1.05;margin:0}h1 em{font-weight:400}.intro-description{max-width:240px}.intro-description p{font-size:13px;line-height:1.9;margin:0 0 19px;color:var(--muted)}.generate{border:0;background:var(--ink);color:#f6f7ef;border-radius:100px;padding:0 24px;height:46px;display:inline-flex;align-items:center;gap:36px;font-size:13px;transition:transform .2s,background .2s}.generate:hover{background:#455644;transform:translateY(-2px)}.generate:active{transform:translateY(1px)}.palette{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.swatch{position:relative;min-height:335px;border:0;padding:25px 24px;text-align:left;border-radius:12px;background:var(--swatch);color:var(--label);display:flex;justify-content:space-between;flex-direction:column;transition:transform .2s}.swatch:hover{transform:translateY(-4px)}.swatch:active{transform:translateY(1px)}.swatch-number{font-size:11px}.swatch-info{display:flex;flex-direction:column;gap:8px}.swatch-hex{font-family:Consolas,monospace;font-size:18px;font-weight:500;letter-spacing:-.5px}.swatch-action{font-size:11px;display:flex;justify-content:space-between}.palette-foot{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;padding:26px 0 0;font-size:12px;color:var(--muted);line-height:1.7}.status{margin:0;min-height:24px;max-width:700px}.hint{margin:0;white-space:nowrap}footer{margin-top:74px;border-top:1px solid var(--line);padding:26px 0 36px;display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+    @media(max-width:800px){.page{padding:0 24px}header{height:76px}.intro{padding:42px 0 30px;display:block}h1{font-size:59px;letter-spacing:-2.5px}.intro-description{max-width:none;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:26px}.intro-description p{font-size:12px;margin:0;max-width:170px}.generate{padding:0 20px;gap:14px;flex-shrink:0}.palette{gap:8px;grid-template-columns:1fr}.swatch{min-height:118px;padding:20px 22px;flex-direction:row;align-items:flex-start;border-radius:10px}.swatch-info{align-self:flex-end;min-width:130px}.swatch-hex{font-size:20px}.swatch-action{gap:26px}.palette-foot{flex-direction:column;gap:8px}.hint{white-space:normal}footer{margin-top:42px;gap:16px;line-height:1.6}.swatch:hover{transform:translateY(-2px)}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+    .preview .back,.preview footer{display:none}.preview header{height:72px}.preview .intro{padding:42px 0 36px}.preview h1{font-size:72px}.preview .swatch{min-height:310px}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header><a class="logo" href="../../index.html" aria-label="Palette，返回作品集"><span class="logo-dot" aria-hidden="true"></span>palette.</a><a class="back" href="../../index.html">返回作品集 ↗</a></header>
+    <main>
+      <section class="intro" aria-labelledby="title"><div><p class="eyebrow">A LITTLE COLOR EXPLORATION</p><h1 id="title">A palette for<br><em>your next idea.</em></h1></div><div class="intro-description"><p>生成一组颜色。点击色块，把喜欢的 HEX 色值带走。</p><button class="generate" id="generate" type="button">换一组配色 <span aria-hidden="true">↻</span></button></div></section>
+      <div class="palette" id="palette" aria-label="当前配色">
+        <button class="swatch" type="button" data-color="#DDE5D5" style="--swatch:#DDE5D5;--label:#303c31" aria-label="复制色值 #DDE5D5"><span class="swatch-number">01</span><span class="swatch-info"><span class="swatch-hex">#DDE5D5</span><span class="swatch-action">复制色值 <span aria-hidden="true">↗</span></span></span></button>
+        <button class="swatch" type="button" data-color="#A8B89A" style="--swatch:#A8B89A;--label:#303c31" aria-label="复制色值 #A8B89A"><span class="swatch-number">02</span><span class="swatch-info"><span class="swatch-hex">#A8B89A</span><span class="swatch-action">复制色值 <span aria-hidden="true">↗</span></span></span></button>
+        <button class="swatch" type="button" data-color="#718568" style="--swatch:#718568;--label:#000000" aria-label="复制色值 #718568"><span class="swatch-number">03</span><span class="swatch-info"><span class="swatch-hex">#718568</span><span class="swatch-action">复制色值 <span aria-hidden="true">↗</span></span></span></button>
+        <button class="swatch" type="button" data-color="#D3BDA8" style="--swatch:#D3BDA8;--label:#303c31" aria-label="复制色值 #D3BDA8"><span class="swatch-number">04</span><span class="swatch-info"><span class="swatch-hex">#D3BDA8</span><span class="swatch-action">复制色值 <span aria-hidden="true">↗</span></span></span></button>
+        <button class="swatch" type="button" data-color="#313F35" style="--swatch:#313F35;--label:#fffdf3" aria-label="复制色值 #313F35"><span class="swatch-number">05</span><span class="swatch-info"><span class="swatch-hex">#313F35</span><span class="swatch-action">复制色值 <span aria-hidden="true">↗</span></span></span></button>
+      </div>
+      <div class="palette-foot"><p class="status" id="status" role="status" aria-live="polite">这组颜色，从一片叶子开始。</p><p class="hint">5 种颜色 / 点击即可复制</p></div>
+    </main>
+    <footer><span>palette. / 配色生成器</span><span>为下一个网页找一点颜色。</span></footer>
+  </div>
+  <script>
+    const swatches = [...document.querySelectorAll('.swatch')];
+    const status = document.getElementById('status');
+    function hslToHex(h, s, l) {
+      s /= 100; l /= 100;
+      const a = s * Math.min(l, 1 - l);
+      const channel = n => {
+        const k = (n + h / 30) % 12;
+        const value = l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+        return Math.round(255 * value).toString(16).padStart(2, '0');
+      };
+      return `#${channel(0)}${channel(8)}${channel(4)}`.toUpperCase();
+    }
+    function textColor(hex) {
+      const channels = [1, 3, 5].map(offset => {
+        const value = parseInt(hex.slice(offset, offset + 2), 16) / 255;
+        return value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4;
+      });
+      const luminance = .2126 * channels[0] + .7152 * channels[1] + .0722 * channels[2];
+      return luminance > .179 ? '#000000' : '#FFFFFF';
+    }
+    document.getElementById('generate').addEventListener('click', () => {
+      const hue = Math.floor(Math.random() * 360);
+      const saturation = 20 + Math.random() * 23;
+      const values = [[hue, saturation * .55, 88], [hue, saturation * .8, 69], [hue, saturation, 46], [(hue + 155) % 360, saturation * .8, 72], [hue, saturation * .65, 23]];
+      swatches.forEach((swatch, index) => {
+        const color = hslToHex(...values[index]);
+        swatch.dataset.color = color;
+        swatch.style.setProperty('--swatch', color);
+        swatch.style.setProperty('--label', textColor(color));
+        swatch.querySelector('.swatch-hex').textContent = color;
+        swatch.setAttribute('aria-label', `复制色值 ${color}`);
+      });
+      status.textContent = '新配色已生成。点击任意色块，复制它的 HEX 色值。';
+    });
+    swatches.forEach(swatch => swatch.style.setProperty('--label', textColor(swatch.dataset.color)));
+    swatches.forEach(swatch => swatch.addEventListener('click', async () => {
+      const color = swatch.dataset.color;
+      try {
+        if (!navigator.clipboard || !window.isSecureContext) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(color);
+        status.textContent = `已复制 ${color}。可以粘贴到你的样式表中。`;
+      } catch {
+        status.textContent = `浏览器未允许复制。请手动复制色值：${color}`;
+      }
+    }));
+  </script>
+</body>
+</html>
