@@ -110,5 +110,22 @@
       "issue": 1,
       "author": "Right202209"
     }
+  },
+  {
+    "id": "pelicans-claude-haiku-5-5-high",
+    "title": "鹈鹕骑自行车",
+    "description": "claude-haiku-5.5-high",
+    "category": "interaction",
+    "tags": [
+      "SVG"
+    ],
+    "date": "2026-11-13",
+    "url": "demos/pelicans-claude-haiku-5-5-high/index.html",
+    "preview": null,
+    "featured": false,
+    "submission": {
+      "issue": 2,
+      "author": "Right202209"
+    }
   }
 ]
